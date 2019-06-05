@@ -86,12 +86,21 @@ class Board extends Component {
     // console.log(tblBoard);
 
     if (this.state.hasWon) {
-      return <h1>You Won!!</h1>;
+      return (
+        <div>
+          <div className="neon-orange">YOU</div>
+          <div className="neon-blue">WIN!!</div>
+        </div>
+      );
     } else {
       return (
-        <table className="Board">
-          <tbody>{tblBoard}</tbody>
-        </table>
+        <div>
+          <div className="neon-orange">Lights</div>
+          <div className="neon-blue">Out</div>
+          <table className="Board">
+            <tbody>{tblBoard}</tbody>
+          </table>
+        </div>
       );
     }
   }
