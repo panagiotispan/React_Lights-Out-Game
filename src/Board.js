@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import Cell from "./Cell";
 import "./Board.css";
 
-/** Game board of Lights out.
- *
- * Properties:
- *
- * - nrows: number of rows of board
- * - ncols: number of cols of board
- * - chanceLightStartsOn: float, chance any cell is lit at start of game
- *
+/*
  * State:
  *
  * - hasWon: boolean, true when board is all off
@@ -40,11 +33,9 @@ class Board extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { hasWon: false, board: [] };
+    this.state = { hasWon: false, board: [], testVar: "" };
     this.flipCellsAround = this.flipCellsAround.bind(this);
   }
-
-  /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
 
   createBoard() {
     let board = [];
@@ -83,57 +74,42 @@ class Board extends Component {
 
   render() {
     // if the game is won, just show a winning msg & render nothing else
-    let table = [];
+    let mainTable = [];
+
     for (let i = 0; i < this.props.nrows; i++) {
-      table[i] = Array.from({ length: this.props.ncols }).map(() => {
-        return this.props.chanceLightStartsOn();
-      });
+      mainTable[i] = Array.from({ length: this.props.ncols }).map(
+        (value, index) => {
+          // console.log(index);
+          return (
+            <Cell
+              key={`${i}-${index}`}
+              isLit={this.props.chanceLightStartsOn()}
+              flipCellsAround={this.flipCellsAround}
+            />
+          );
+        }
+      );
     }
 
-    console.log(table);
+    console.log(mainTable);
 
     return (
       <table className="Board">
         <tbody>
-          <tr>
-            <Cell
-              keyss="0-0"
-              isLit={true}
-              flipCellsAround={this.flipCellsAround}
-            />
-            <Cell isLit={false} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-          </tr>
-          <tr>
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={false} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-          </tr>
-          <tr>
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={false} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-          </tr>
-          <tr>
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={false} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-          </tr>
-          <tr>
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={false} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-            <Cell isLit={true} flipCellsAround={this.flipCellsAround} />
-          </tr>
+          <tr>{mainTable[0]}</tr>
+          <tr>{mainTable[1]}</tr>
+          <tr>{mainTable[2]}</tr>
+          <tr>{mainTable[3]}</tr>
+          <tr>{mainTable[4]}</tr>
+          <tr>{mainTable[5]}</tr>
+          <tr>{mainTable[6]}</tr>
+          <tr>{mainTable[7]}</tr>
+          <tr>{mainTable[8]}</tr>
+          <tr>{mainTable[9]}</tr>
+          <tr>{mainTable[10]}</tr>
+          <tr>{mainTable[11]}</tr>
+          <tr>{mainTable[12]}</tr>
+          <tr>{mainTable[13]}</tr>
         </tbody>
       </table>
     );
